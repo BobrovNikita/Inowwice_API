@@ -1,0 +1,164 @@
+﻿body {
+    padding: 0;
+    margin-top: 100px;
+    background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+}
+.content{
+    display: flex;
+    justify-content: space-between;
+    margin:  auto;
+    border: 4px solid white;
+    background-color: gray;
+    padding: 20px;  
+    border-radius: 20px;
+    width: 1500px;
+}
+
+
+.products {
+    margin: auto;
+    border: 4px solid white;
+    background-color: gray;
+    padding: 20px;
+    border-radius: 20px;
+    width: 1500px;
+}
+
+.products h1{
+    color: white;
+}
+
+.content .about{
+    box-shadow: 0 4px 10px white;
+    padding: 30px 50px 0px 10px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.content .about .header *{
+    margin: 0;
+    text-align: center;
+    color: Black;
+}
+
+.content .about .information{
+    text-align: left;
+    margin-top: 80px;
+}
+
+.content .about .information h4{
+    text-align: left;
+    font-size: 24px;
+    margin: 5px;
+    color: #808080
+}
+
+.content .about .information h4 span{
+    display: block;
+    margin: 3px 0 20px 0;
+    color: black;
+}
+
+.content .imageBlock{
+    margin: 10px 0;
+}
+
+.content .imageBlock img{
+    width: 700px;
+    height: 100%;
+    border: 10px solid white;
+    border-radius: 20px;
+}
+
+.content .about .buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    padding-bottom: 0;
+}
+
+.content .about .buttons form input{
+      border: 3px solid black;
+      padding: 8px 16px;
+      margin: 0 10px;
+      font-size: 24px;
+      font-weight: 700;
+      background-color: transparent;
+}
+
+    .content .about .buttons form input:hover {
+        background-color: rgba(105, 105, 105, 0.5);
+        color: white;
+        transition-duration: 0.3s;
+    }
+    .content .about .buttons input {
+        border: 3px solid black;
+        padding: 8px 16px;
+        margin: 0 10px;
+        font-size: 24px;
+        font-weight: 700;
+        background-color: transparent;
+    }
+
+    .content .about .but input {
+        padding: 8px 16px;
+        margin: 0 10px;
+        font-size: 24px;
+        font-weight: 700;
+        background-color: transparent;
+    }
+.content .about label {
+    text-align: left;
+    font-size: 24px;
+    margin: 5px;
+    color: #808080;
+}
+
+.header-text{
+    text-align:center;
+    color: white;
+    font-weight: 700;
+    font-size: 34px;
+}
+
+.editplace {
+    margin: auto;
+    border: 4px solid white;
+    background-color: gray;
+    padding: 20px;
+    border-radius: 20px;
+    width: 1500px;
+}
+
+.InfoBlock{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.InfoBlock .about {
+    box-shadow: 0 4px 10px white;
+    padding: 30px 50px 0px 10px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.InfoBlock .imageBlock img {
+    width: 700px;
+    height: 100%;
+    border: 10px solid white;
+    border-radius: 20px;
+}
+
+.InfoBlock .about {
+    box-shadow: 0 4px 10px white;
+    padding: 30px 50px 0px 10px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.editplace .about form p{
+    font-size: 24px;
+}
+

@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Fridges Store</title>
+    <link rel="stylesheet" href="~/css/MainPage.css" />
+</head>
+<body>
+    <div class=" Mainblock">
+        <p>
+            Данный проект создан для прохождения стажировки в Innowice Group в отделе .NET
+            В проекте осуществляется возможность добавления моделей холодильника, продуктов, холодильником и заполнение холодильника продуктами
+            Имеются все основные задачи которые были прописаны в условии
+            Так же кнопка для вызова хранимой процедуры, которая будет искать в таблице "Продукты в холодильнике" записи где количество равно 0 и заполнять его дефолтными значаниями
+        </p>
+
+        <form asp-controller="Home" asp-action="ScoreProcedure" method="post">
+            <input type="submit" value="Хранимая процедура" />
+        </form>
+    </div>
+</body>
+</html>
