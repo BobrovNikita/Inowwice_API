@@ -1,0 +1,21 @@
+﻿body {
+}
+.content {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    border: 4px solid white;
+    background-color: gray;
+    padding: 20px;
+    border-radius: 20px;
+    width: 1500px;
+}
+    .content .imageBlock img {
+        width: 700px;
+        height: 100%;
+        border: 10px solid white;
+        border-radius: 20px;
+    }
+    .content .imageBlock {
+        margin: 10px 0;
+    }

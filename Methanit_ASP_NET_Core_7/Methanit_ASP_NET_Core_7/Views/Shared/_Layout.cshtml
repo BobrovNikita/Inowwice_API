@@ -1,0 +1,28 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Fridges store</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@1,300&family=Exo+2:wght@100&family=Exo:wght@100&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbarr">
+        <div class="containerr">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brandd"><img src="~/Image/Logo.png"/></a>
+
+            <div class="navbar-wrapp">
+                <ul class="navbar-menuu">
+                    <li><a asp-controller="Fridge" asp-action="Index">Fridges</a></li>
+                    <li><a asp-controller="Products" asp-action="Index">Products</a></li>
+                    <li><a asp-controller="FridgeModels" asp-action="Index">Fridge Models</a></li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+        @RenderBody()
+</body>
+</html>
