@@ -7,13 +7,12 @@ namespace Methanit_ASP_NET_Core_7.Controllers
 {
     public class ProductsController : Controller
     {
-        private IRepository<Products> _repository;
-        public ProductsController(IRepository<Products> repository)
+        private readonly IRepository<Product> _repository;
+        public ProductsController(IRepository<Product> repository)
         {
             _repository = repository;
         }
 
-        //Get methods
         [HttpGet]
         public IActionResult Index()
         {
@@ -31,11 +30,10 @@ namespace Methanit_ASP_NET_Core_7.Controllers
         {
             if (id != null)
             {
-                Products? model = _repository.GetModel((Guid)id);
+                Product? model = _repository.GetModel((Guid)id);
                 if (model != null)
                     return View(model);
             }
-
             return NotFound();
         }
 
@@ -43,17 +41,14 @@ namespace Methanit_ASP_NET_Core_7.Controllers
         {
             if (id != null)
             {
-                Products? model = _repository.GetModel((Guid)id);
+                Product? model = _repository.GetModel((Guid)id);
                 return PartialView("Deletes", model);
             }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
-        //Post methods
+        
         [HttpPost]
-        public IActionResult Create(Products model)
+        public IActionResult Create(Product model)
         {
             if (ModelState.IsValid)
             {
@@ -61,15 +56,12 @@ namespace Methanit_ASP_NET_Core_7.Controllers
                 _repository.Save();
                 return RedirectToAction("Index");
             }
-            else
-            {
-                return View(model);
-            }
+            return View(model);
             
         }
 
         [HttpPost]
-        public IActionResult Edit(Products model)
+        public IActionResult Edit(Product model)
         {
             if (ModelState.IsValid)
             {
@@ -77,17 +69,14 @@ namespace Methanit_ASP_NET_Core_7.Controllers
                 _repository.Save();
                 return RedirectToAction("Index");
             }
-            else
-            {
-                return View(model);
-            }
+            return View(model);
             
         }
 
         [HttpPost]
-        public IActionResult Delete(Products model)
+        public IActionResult Delete(Product model)
         {
-            _repository.Delete(model.ProductsId);
+            _repository.Delete(model.ProductId);
             _repository.Save();
             return RedirectToAction("Index");
         }

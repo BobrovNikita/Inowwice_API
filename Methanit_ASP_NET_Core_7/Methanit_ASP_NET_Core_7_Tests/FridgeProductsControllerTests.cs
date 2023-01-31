@@ -18,7 +18,7 @@ namespace Methanit_ASP_NET_Core_7_Tests
         {
             // Arrange
             var mock = new Mock<IRepository<Fridge_Products>>();
-            var ProductsMock = new Mock<IRepository<Products>>();
+            var ProductsMock = new Mock<IRepository<Product>>();
             var controller = new FridgeProductsController(mock.Object, ProductsMock.Object);
             controller.ModelState.AddModelError("ProductsId", "Required");
             Fridge_Products newModel = new Fridge_Products();
@@ -35,7 +35,7 @@ namespace Methanit_ASP_NET_Core_7_Tests
         public void AddModelReturnsARedirectAndAddsModel()
         {
             var mock = new Mock<IRepository<Fridge_Products>>();
-            var productsMock = new Mock<IRepository<Products>>();
+            var productsMock = new Mock<IRepository<Product>>();
             var controller = new FridgeProductsController(mock.Object, productsMock.Object);
             var newModel = new Fridge_Products()
             {
@@ -57,7 +57,7 @@ namespace Methanit_ASP_NET_Core_7_Tests
         {
             Guid testModelId = Guid.NewGuid();
             var mock = new Mock<IRepository<Fridge_Products>>();
-            var productsMock = new Mock<IRepository<Products>>();
+            var productsMock = new Mock<IRepository<Product>>();
             mock.Setup(repo => repo.GetModel(testModelId))
                 .Returns(null as Fridge_Products);
             var controller = new FridgeProductsController(mock.Object, productsMock.Object);
@@ -71,7 +71,7 @@ namespace Methanit_ASP_NET_Core_7_Tests
         {
             Guid testModelId = Guid.Parse("0034b8d1-dca7-40e8-1fee-08daed8c6976");
             var mock = new Mock<IRepository<Fridge_Products>>();
-            var productsMock = new Mock<IRepository<Products>>();
+            var productsMock = new Mock<IRepository<Product>>();
             mock.Setup(repo => repo.GetModel(testModelId))
                 .Returns(GetTestModel().First(p => p.Id == testModelId));
             var controller = new FridgeProductsController(mock.Object, productsMock.Object);

@@ -28,8 +28,5 @@ namespace Methanit_ASP_NET_Core_7.Models
 
         [ValidateNever]
         public IEnumerable<Fridge_Products> Fridge_Products { get; set; }
-
-        [ValidateNever]
-        public IEnumerable<Products> Products { get; set; }
     }
 }

@@ -2,16 +2,15 @@
 using Methanit_ASP_NET_Core_7.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace Methanit_ASP_NET_Core_7.Controllers
 {
     public class FridgeProductsController : Controller
     {
-        private IRepository<Fridge_Products> _repository;
-        private IRepository<Products> _products;
+        private readonly IRepository<Fridge_Products> _repository;
+        private readonly IRepository<Product> _products;
 
-        public FridgeProductsController(IRepository<Fridge_Products> repository, IRepository<Products> products)
+        public FridgeProductsController(IRepository<Fridge_Products> repository, IRepository<Product> products)
         {
             _repository = repository;
             _products = products;
@@ -37,7 +36,7 @@ namespace Methanit_ASP_NET_Core_7.Controllers
                 Fridge_Products? model = _repository.GetModel((Guid)id);
                 if (model != null)
                 {
-                    ViewBag.Products = new SelectList(_products.GetAll(), "ProductsId", "Name", model.ProductsId);
+                    ViewBag.Products = new SelectList(_products.GetAll(), "ProductsId", "Name", model.ProductId);
                     return View(model);
                 }
             }
@@ -46,7 +45,7 @@ namespace Methanit_ASP_NET_Core_7.Controllers
 
         [HttpPost]
         public IActionResult Add(Fridge_Products model)
-       {
+        {
             if (ModelState.IsValid)
             {
                 model.FridgeId = model.Id;
@@ -55,11 +54,8 @@ namespace Methanit_ASP_NET_Core_7.Controllers
                 _repository.Save();
                 return Redirect($"~/Fridge/About/{model.FridgeId}");
             }
-            else
-            {
-                ViewBag.Products = new SelectList(_products.GetAll(), "ProductsId", "Name");
-                return View(model);
-            }
+            ViewBag.Products = new SelectList(_products.GetAll(), "ProductsId", "Name");
+            return View(model);            
         }
 
         [HttpPost]
@@ -90,10 +86,7 @@ namespace Methanit_ASP_NET_Core_7.Controllers
                     _repository.Save();
                     return Redirect($"~/Fridge/About/{model.FridgeId}");
                 }
-                else
-                {
-                    return View(model);
-                }
+                return View(model);
             }
             return NotFound();
         }

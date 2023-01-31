@@ -22,7 +22,7 @@ namespace Methanit_ASP_NET_Core_7_Tests
             // Arrange
             var mock = new Mock<IRepository<Fridge>>();
             var fridgeModelsMock = new Mock<IRepository<Fridge_Model>>();
-            var productsMock = new Mock<IRepository<Products>>();
+            var productsMock = new Mock<IRepository<Product>>();
             var fridgeProductsMock = new Mock<IRepository<Fridge_Products>>();
             var webHostMock = new Mock<IWebHostEnvironment>();
             mock.Setup(repo => repo.GetAll()).Returns(GetTestModel());
@@ -42,7 +42,7 @@ namespace Methanit_ASP_NET_Core_7_Tests
             Guid testModelId = Guid.NewGuid();
             var mock = new Mock<IRepository<Fridge>>();
             var fridgeModelsMock = new Mock<IRepository<Fridge_Model>>();
-            var productsMock = new Mock<IRepository<Products>>();
+            var productsMock = new Mock<IRepository<Product>>();
             var fridgeProductsMock = new Mock<IRepository<Fridge_Products>>();
             var webHostMock = new Mock<IWebHostEnvironment>();
             mock.Setup(repo => repo.GetModel(testModelId))
@@ -60,7 +60,7 @@ namespace Methanit_ASP_NET_Core_7_Tests
             Guid testModelId = Guid.Parse("1e9535bf-1508-47b9-3232-08daed8589e5");
             var mock = new Mock<IRepository<Fridge>>();
             var fridgeModelsMock = new Mock<IRepository<Fridge_Model>>();
-            var productsMock = new Mock<IRepository<Products>>();
+            var productsMock = new Mock<IRepository<Product>>();
             var fridgeProductsMock = new Mock<IRepository<Fridge_Products>>();
             var webHostMock = new Mock<IWebHostEnvironment>();
             mock.Setup(repo => repo.GetModel(testModelId))

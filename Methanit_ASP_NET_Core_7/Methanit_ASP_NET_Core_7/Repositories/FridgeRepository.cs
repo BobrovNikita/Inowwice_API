@@ -39,28 +39,6 @@ namespace Methanit_ASP_NET_Core_7.Repositories
         public void Save()
         {
             db.SaveChanges();
-        }
-
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    db.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
+        }      
     }
 }

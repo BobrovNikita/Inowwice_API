@@ -10,7 +10,7 @@ namespace Methanit_ASP_NET_Core_7
     {
         public DbSet<Fridge_Model> Fridge_Models { get; set; }
         public DbSet<Fridge> Fridges { get; set; }
-        public DbSet<Products> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<Fridge_Products> FridgeProducts { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)

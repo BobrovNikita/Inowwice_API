@@ -2,18 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using System.Reflection.Metadata;
 
 namespace Methanit_ASP_NET_Core_7.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationContext db;
+        private readonly ApplicationContext db;
 
         public HomeController(ApplicationContext context)
         {
             db = context;
-            
+
         }
         [HttpGet]
         public IActionResult Index()
@@ -28,7 +27,7 @@ namespace Methanit_ASP_NET_Core_7.Controllers
         }
 
         [HttpPost]
-        public IActionResult ScoreProcedure()
+        public IActionResult ScoredProcedure()
         {
             var a = db.Database.ExecuteSqlRaw("UpdateDefaultValueIntoFridgeProducts");
             return View("Index");

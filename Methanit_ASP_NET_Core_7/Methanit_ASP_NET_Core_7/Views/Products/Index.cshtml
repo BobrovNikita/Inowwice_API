@@ -1,5 +1,5 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model IEnumerable<Methanit_ASP_NET_Core_7.Models.Products>
+@model IEnumerable<Methanit_ASP_NET_Core_7.Models.Product>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,12 +28,12 @@
                     <td>@item.Name</td>
                     <td>@item.Default_Quantity</td>
                     <td>
-                        <form asp-controller="Products" asp-action="Edit" method="get" asp-route-id="@item.ProductsId">
+                        <form asp-controller="Products" asp-action="Edit" method="get" asp-route-id="@item.ProductId">
                             <input type="submit" value="Редактировать" />
                         </form>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#DeleteProducts-"+item.ProductsId)" data-url="@Url.Action($"Deletes/{item.ProductsId}")">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#DeleteProducts-"+item.ProductId)" data-url="@Url.Action($"Deletes/{item.ProductId}")">
                         Delete
                     </button>
                     @await Html.PartialAsync("Deletes", item)

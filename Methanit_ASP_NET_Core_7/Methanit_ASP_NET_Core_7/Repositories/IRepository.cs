@@ -1,6 +1,6 @@
 ﻿namespace Methanit_ASP_NET_Core_7.Repositories
 {
-    public interface IRepository<T> : IDisposable
+    public interface IRepository<T>
         where T : class
     {
         IEnumerable<T> GetAll();

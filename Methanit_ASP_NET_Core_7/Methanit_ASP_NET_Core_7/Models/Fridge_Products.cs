@@ -17,9 +17,9 @@ namespace Methanit_ASP_NET_Core_7.Models
         public Fridge Fridges { get; set; }
 
         [Required(ErrorMessage = "It's require field")]
-        public Guid ProductsId { get; set; }
+        public Guid ProductId { get; set; }
 
         [ValidateNever]
-        public Products Products { get; set; }
+        public Product Products { get; set; }
     }
 }

@@ -18,7 +18,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 //Repositories
 builder.Services.AddScoped<IRepository<Fridge_Model>, Fridge_Models_Repository>();
-builder.Services.AddScoped<IRepository<Products>, ProductsRepository>();
+builder.Services.AddScoped<IRepository<Product>, ProductsRepository>();
 builder.Services.AddScoped<IRepository<Fridge>, FridgeRepository>();
 builder.Services.AddScoped<IRepository<Fridge_Products>, FridgeProductsRepository>();
 
@@ -35,7 +35,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

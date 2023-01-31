@@ -2,7 +2,7 @@
 
 namespace Methanit_ASP_NET_Core_7.Repositories
 {
-    public class ProductsRepository : IRepository<Products>
+    public class ProductsRepository : IRepository<Product>
     {
         ApplicationContext db;
 
@@ -11,16 +11,16 @@ namespace Methanit_ASP_NET_Core_7.Repositories
             db = context;
         }
 
-        public IEnumerable<Products> GetAll()
+        public IEnumerable<Product> GetAll()
         {
             return db.Products.ToList();
         }
 
-        public Products GetModel(Guid id)
+        public Product GetModel(Guid id)
         {
-            return db.Products.First(f => f.ProductsId == id);
+            return db.Products.First(f => f.ProductId == id);
         }
-        public void Create(Products item)
+        public void Create(Product item)
         {
             db.Products.Add(item);
         }
@@ -31,7 +31,7 @@ namespace Methanit_ASP_NET_Core_7.Repositories
         }
 
 
-        public void Update(Products item)
+        public void Update(Product item)
         {
             db.Products.Update(item);
         }
@@ -41,25 +41,5 @@ namespace Methanit_ASP_NET_Core_7.Repositories
             db.SaveChanges();
         }
 
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    db.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
     }
 }
