@@ -1,0 +1,32 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model FridgeProducts.Models.FridgeModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Fridges store</title>
+    <link rel="stylesheet" href="~/css/CreatePM.css" />
+</head>
+<body>
+    <div class="content">
+    <h2 class="v2">Редактирование модели холодильника</h2>
+    <form asp-action="Edit" asp-controller="FridgeModels" asp-route-FridgeModelId="@Model.FridgeModelId">
+        <p>
+            <label asp-for="Name">Название</label><br />
+            <input type="text" asp-for="Name" />
+            <span asp-validation-for="Name" style="Color: white; font-weight: 700;" />
+        </p>
+        <p>
+            <label asp-for="Year">Год выпуска</label><br />
+            <input type="number" asp-for="Year" />
+            <span asp-validation-for="Year" style="Color: white; font-weight: 700;" />
+        </p>
+        <p>
+                <input type="submit" class="viv" value="Сохранить" />
+        </p>
+    </form>
+    </div>
+</body>
+</html>
+

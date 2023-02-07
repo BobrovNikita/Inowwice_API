@@ -1,0 +1,64 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model FridgeProducts.Models.Fridge
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Fridges store</title>
+</head>
+<link rel="stylesheet" href="~/css/AboutFridge.css" />
+    <link rel="stylesheet" href="~/css/FridgeModelsStyle.css" />
+<body>
+    
+    <div class="editplace">
+        <h2 class="header-text">Редактирование холодильника</h2>
+        <div class="InfoBlock">
+            <div class="about">
+                <form asp-action="Edit" asp-controller="Fridge" enctype="multipart/form-data">
+                    <p>
+                        <input type="hidden" asp-for="FridgeId" />
+                    </p>
+
+                    <p>
+                        <input type="hidden" asp-for="Image" />
+                    </p>
+                    <p>
+                        <label asp-for="Name">Название:</label><br />
+                        <input type="text" asp-for="Name" />
+                        <span asp-validation-for="Name" style="Color: black; font-weight: 700;" />
+                    </p>
+                    <p>
+                        <label asp-for="OwnerName">Имя владельца:</label><br />
+                        <input type="text" asp-for="OwnerName" />
+                        <span asp-validation-for="OwnerName" style="Color: black; font-weight: 700;" />
+                    </p>
+                    <p>
+                        <label asp-for="FridgeModelId">Название модели:</label><br />
+                        <select asp-for="FridgeModelId" asp-items="ViewBag.Fridges">
+                            <option selected="selected" disabled="disabled">Выберите модель</option>
+                        </select>
+                        <span asp-validation-for="FridgeModelId" style="Color: black; font-weight: 700;" />
+                    </p>
+
+                    <p>
+                        <label asp-for="Image">Изображение:</label>
+                        <div class="but">
+                            <input type="file" asp-for="Image" accept=".jpg, .jpeg, .png" />
+                        </div>
+                    </p>
+                    <div class="buttons">
+                        <p>
+                            <input type="submit" value="Сохранить" />
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div class="imageBlock">
+                <img src="@FilePath.ImagePath@Model.Image" width="100%" style="border-radius:5px; border:1px solid #bbb" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

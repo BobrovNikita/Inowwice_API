@@ -1,0 +1,29 @@
+﻿@model FridgeProducts.Models.FridgeModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Fridges store</title>
+    <link rel="stylesheet" href="~/css/CreatePM.css" />
+</head>
+<body>
+    <div class="content">
+<h2 class="v2">Добавление модели холодильника</h2>
+<form asp-action="create" asp-controller="FridgeModels">
+    <p>
+        <label asp-for="Name">Название модели</label><br />
+        <input type="text" asp-for="Name"/><br />
+        <span asp-validation-for="Name" style="Color: white; font-weight: 700;" />
+    </p>
+    <p>
+        <label asp-for="Year">Год выпуска</label><br />
+        <input type="number" asp-for="Year" />
+        <span asp-validation-for="Year" style="Color: white; font-weight: 700;" />
+    </p>
+    <p>
+        <input type="submit" class="viv"value="Отправить" />
+    </p>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
+namespace FridgeProducts.Models
+{
+    public class Product
+    {
+        public Guid ProductId { get; set; }
+
+        [Required(ErrorMessage = "It's require field")]
+        [StringLength(30, MinimumLength = 3, ErrorMessage = "Value must be between 3 and 30 symbols")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "It's require field")]
+        [Range(1, 5000, ErrorMessage = "Year must be between 1 and 5000")]
+        public int DefaultQuantity { get; set; }
+
+
+        [ValidateNever]
+        public IEnumerable<FridgeProducts> FridgeProducts { get; set; }
+    }
+}

@@ -1,0 +1,31 @@
+﻿@model FridgeProducts.Models.Product
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Fridges store</title>
+    <link rel="stylesheet" href="~/css/CreatePM.css" />
+</head>
+<body>
+<div class="content">
+        <h2>Добавление Продукта</h2>
+        <form asp-action="Create" asp-controller="Products">
+            
+        <p>
+            <label asp-for="Name">Название продукта:</label><br />
+            <input type="text" asp-for="Name" />
+            <span asp-validation-for="Name" style="Color: white; font-weight: 700;" />
+        </p>
+        <p>
+            <label asp-for="DefaultQuantity">Количество:</label><br />
+            <input type="number" asp-for="DefaultQuantity" />
+            <span asp-validation-for="DefaultQuantity" style="Color: white; font-weight: 700;" />
+        </p>
+        <p>
+            <input type="submit" class="viv"value="Отправить" />
+        </p>
+    </form>
+</div>
+
+</body>
+</html>
