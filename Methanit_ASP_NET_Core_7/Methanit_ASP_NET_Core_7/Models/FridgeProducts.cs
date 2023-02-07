@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
-namespace Methanit_ASP_NET_Core_7.Models
+namespace FridgeProducts.Models
 {
-    public class Fridge_Products
+    public class FridgeProducts
     {
         public Guid Id { get; set; }
 

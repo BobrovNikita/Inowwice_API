@@ -1,10 +1,10 @@
-﻿using Methanit_ASP_NET_Core_7.Models;
+﻿using FridgeProducts.Models;
 
-namespace Methanit_ASP_NET_Core_7.Repositories
+namespace FridgeProducts.Repositories
 {
     public class ProductsRepository : IRepository<Product>
     {
-        ApplicationContext db;
+        private readonly ApplicationContext db;
 
         public ProductsRepository(ApplicationContext context)
         {

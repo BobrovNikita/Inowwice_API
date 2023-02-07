@@ -1,4 +1,4 @@
-﻿@model Methanit_ASP_NET_Core_7.Models.Fridge;
+﻿@model FridgeProducts.Models.Fridge;
 
 <!DOCTYPE html>
 <html>
@@ -15,9 +15,9 @@
                 <h1>@Model.Name</h1>
             </div>
             <div class="information">
-                <h4>Имя владельца: <span>@Model.Owner_Name</span></h4>
-                <h4>Название модели: <span>@Model.Fridge_Model.Name</span></h4>
-                <h4>Год выпуска: <span>@Model.Fridge_Model.Year</span></h4>
+                <h4>Имя владельца: <span>@Model.OwnerName</span></h4>
+                <h4>Название модели: <span>@Model.FridgeModel.Name</span></h4>
+                <h4>Год выпуска: <span>@Model.FridgeModel.Year</span></h4>
             </div>
 
             <div class="buttons">
@@ -42,7 +42,7 @@
 
     </div>
         <div class="products">
-            @if (@ViewBag.FridgesInProducts.Count <= 0)
+        @if (@ViewBag.FridgesInProducts.Count <= 0)
             {
                 <h1>В холодильнике нет продуктов</h1>
             }
@@ -54,7 +54,7 @@
                         <th>Название продукта</th>
                         <th>Количество</th>
                     </tr>
-                
+
                 @foreach (var item in ViewBag.FridgesInProducts)
                 {
                     <tr>

@@ -1,5 +1,5 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model Methanit_ASP_NET_Core_7.Models.Product
+@model FridgeProducts.Models.Product
 
 <!DOCTYPE html>
 <html>
@@ -11,16 +11,16 @@
 <body>
      <div class="content">
         <h2 class="v2">Редактирование продукта</h2>
-        <form asp-action="Edit" asp-controller="Products" asp-route-ProductsId="@Model.ProductId">
+        <form asp-action="Edit" asp-controller="Products" asp-route-ProductId="@Model.ProductId">
             <p>
                 <label asp-for="Name">Название продукта:</label><br />
                 <input type="text" asp-for="Name" />
                 <span asp-validation-for="Name" style="Color: white; font-weight: 700;" />
             </p>
             <p>
-                <label asp-for="Default_Quantity">Количество:</label><br />
-                <input type="number" asp-for="Default_Quantity" />
-                <span asp-validation-for="Default_Quantity" style="Color: white; font-weight: 700;" />
+                <label asp-for="DefaultQuantity">Количество:</label><br />
+                <input type="number" asp-for="DefaultQuantity" />
+                <span asp-validation-for="DefaultQuantity" style="Color: white; font-weight: 700;" />
             </p>
             <p>
                 <input type="submit" class="viv"value="Сохранить" />

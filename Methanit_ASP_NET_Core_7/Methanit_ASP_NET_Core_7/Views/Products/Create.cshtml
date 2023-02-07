@@ -1,4 +1,4 @@
-﻿@model Methanit_ASP_NET_Core_7.Models.Product
+﻿@model FridgeProducts.Models.Product
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +17,9 @@
             <span asp-validation-for="Name" style="Color: white; font-weight: 700;" />
         </p>
         <p>
-            <label asp-for="Default_Quantity">Количество:</label><br />
-            <input type="number" asp-for="Default_Quantity" />
-            <span asp-validation-for="Default_Quantity" style="Color: white; font-weight: 700;" />
+            <label asp-for="DefaultQuantity">Количество:</label><br />
+            <input type="number" asp-for="DefaultQuantity" />
+            <span asp-validation-for="DefaultQuantity" style="Color: white; font-weight: 700;" />
         </p>
         <p>
             <input type="submit" class="viv"value="Отправить" />

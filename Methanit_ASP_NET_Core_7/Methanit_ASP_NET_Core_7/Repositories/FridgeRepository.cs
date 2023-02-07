@@ -1,11 +1,11 @@
-﻿using Methanit_ASP_NET_Core_7.Models;
+﻿using FridgeProducts.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Methanit_ASP_NET_Core_7.Repositories
+namespace FridgeProducts.Repositories
 {
     public class FridgeRepository : IRepository<Fridge>
     {
-        ApplicationContext db;
+        private readonly ApplicationContext db;
         public FridgeRepository(ApplicationContext context)
         {
             db = context;
@@ -13,12 +13,12 @@ namespace Methanit_ASP_NET_Core_7.Repositories
 
         public IEnumerable<Fridge> GetAll()
         {
-            return db.Fridges.Include(f => f.Fridge_Model).ToList();
+            return db.Fridges.Include(f => f.FridgeModel).ToList();
         }
 
         public Fridge GetModel(Guid id)
         {
-            return db.Fridges.Include(f => f.Fridge_Model).First(f => f.FridgeId == id);
+            return db.Fridges.Include(f => f.FridgeModel).First(f => f.FridgeId == id);
         }
 
         public void Create(Fridge item)
@@ -39,6 +39,6 @@ namespace Methanit_ASP_NET_Core_7.Repositories
         public void Save()
         {
             db.SaveChanges();
-        }      
+        }
     }
 }

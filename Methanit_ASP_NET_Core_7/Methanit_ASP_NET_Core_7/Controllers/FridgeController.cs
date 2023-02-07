@@ -1,42 +1,37 @@
-﻿using Methanit_ASP_NET_Core_7.Models;
-using Methanit_ASP_NET_Core_7.Repositories;
+﻿using FridgeProducts;
+using FridgeProducts.Models;
+using FridgeProducts.Repositories;
+using FridgeProducts.Services;
+using FridgeProducts.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Methanit_ASP_NET_Core_7.Controllers
+namespace FridgeProducts.Controllers
 {
     public class FridgeController : Controller
     {
-        private readonly IRepository<Fridge> _repository;
-        private readonly IRepository<Fridge_Model> _fridgeModels;
-        private readonly IRepository<Product> _products;
-        private readonly IRepository<Fridge_Products> _fridgeProducts;
-
+        private readonly IFridgeService _fridgeService;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public FridgeController(IRepository<Fridge> repository, IRepository<Fridge_Model> fridgeModels, IRepository<Product> products, IRepository<Fridge_Products> fridgeProducts, IWebHostEnvironment webHostEnvironment)
+        public FridgeController(IFridgeService fridgeService, IWebHostEnvironment webHostEnvironment)
         {
-            _repository = repository;
-            _fridgeModels = fridgeModels;
-            _products = products;
-            _fridgeProducts = fridgeProducts;
-
+            _fridgeService = fridgeService;
             _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_repository.GetAll());
+            return View(_fridgeService.GetAll());
         }
 
         [HttpGet]
         public IActionResult Edit(Guid id)
         {
-                Fridge? model = _repository.GetModel(id);
+            var model = _fridgeService.GetModel(id);
             if (model != null)
             {
-                ViewBag.Fridges = new SelectList(_fridgeModels.GetAll(), "Fridge_ModelId", "Name", model.Fridge_ModelId);
+                ViewBag.Fridges = new SelectList(_fridgeService.GetAllFridgeModels(), "FridgeModelId", "Name", model.FridgeModelId);
                 return View(model);
             }
             return NotFound();
@@ -45,44 +40,35 @@ namespace Methanit_ASP_NET_Core_7.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Fridges = new SelectList(_fridgeModels.GetAll(), "Fridge_ModelId", "Name");
-            ViewBag.Products = _products.GetAll();
+            ViewBag.Fridges = new SelectList(_fridgeService.GetAllFridgeModels(), "FridgeModelId", "Name");
+            ViewBag.Products = _fridgeService.GetAllProducts();
             return View();
         }
 
         [HttpGet]
-        public IActionResult About(Guid? id)
+        public IActionResult About(Guid id)
         {
-            if (id != null)
+            ViewBag.FridgesInProducts = _fridgeService.GetAllFridgeProducts(id);
+            var model = _fridgeService.GetModel(id);
+            if (model != null)
             {
-                ViewBag.FridgesInProducts = _fridgeProducts.GetAll((Guid)id);
-                Fridge? model = _repository.GetModel((Guid)id);
-                if (model != null)
-                {
-                    return View(model);
-                }
+                return View(model);
             }
 
             return NotFound();
-
         }
 
-        public IActionResult Deletes(Guid? id)
+        public IActionResult Deletes(Guid id)
         {
-            if (id != null)
-            {
-                Fridge? model = _repository.GetModel((Guid)id);
-                return PartialView("Deletes", model);
-            }
-            return NotFound();
+            var model = _fridgeService.GetModel(id);
+            return PartialView("Deletes", model);
 
         }
 
         [HttpPost]
         public IActionResult Delete(Fridge model)
         {
-            _repository.Delete(model.FridgeId);
-            _repository.Save();
+            _fridgeService.Delete(model.FridgeId);
             return RedirectToAction("Index");
         }
 
@@ -93,47 +79,12 @@ namespace Methanit_ASP_NET_Core_7.Controllers
             string webRootPath = _webHostEnvironment.WebRootPath;
             if (ModelState.IsValid && files.Count >= 0)
             {
-                Fridge? fridge = _repository.GetModel(model.FridgeId);
-
-                if (fridge != null)
-                {
-                    if (files.Count > 0)
-                    {
-                        string upload = webRootPath + FilePath.ImagePath;
-                        string fileName = Guid.NewGuid().ToString();
-                        string extension = Path.GetExtension(files[0].FileName);
-
-                        var oldFile = Path.Combine(upload, fridge.Image);
-
-                        if (System.IO.File.Exists(oldFile))
-                        {
-                            System.IO.File.Delete(oldFile);
-                        }
-
-                        using (var fileStream = new FileStream(Path.Combine(upload, fileName + extension), FileMode.Create))
-                        {
-                            files[0].CopyTo(fileStream);
-                        }
-
-                        fridge.Image = fileName + extension;
-                    }
-                    else
-                    {
-                        fridge.Image = model.Image;
-                    }
-                    fridge.Name = model.Name;
-                    fridge.Owner_Name = model.Owner_Name;
-                    _repository.Update(model);
-
-                }
-
-                _repository.Save();
-
+                _fridgeService.Update(model, files, webRootPath);
                 return RedirectToAction("About", new { id = model.FridgeId });
             }
 
-            ViewBag.Fridges = new SelectList(_fridgeModels.GetAll(), "Fridge_ModelId", "Name", model.Fridge_ModelId);
-            ViewBag.Products = _products.GetAll();
+            ViewBag.Fridges = new SelectList(_fridgeService.GetAllFridgeModels(), "FridgeModelId", "Name", model.FridgeModelId);
+            ViewBag.Products = _fridgeService.GetAllProducts();
             return View(model);
         }
 
@@ -144,38 +95,12 @@ namespace Methanit_ASP_NET_Core_7.Controllers
             string webRootPath = _webHostEnvironment.WebRootPath;
             if (ModelState.IsValid && files.Count > 0)
             {
-                string upload = webRootPath + FilePath.ImagePath;
-                string fileName = Guid.NewGuid().ToString();
-
-                string extension = Path.GetExtension(files[0].FileName);
-
-                using (var fileStream = new FileStream(Path.Combine(upload, fileName + extension), FileMode.Create))
-                {
-                    files[0].CopyTo(fileStream);
-                }
-
-                model.Image = fileName + extension;
-
-                _repository.Create(model);
-
-                foreach (var item in products)
-                {
-                    if (item.Value != null)
-                    {
-                        Fridge_Products? fp = new Fridge_Products();
-                        fp.FridgeId = model.FridgeId;
-                        fp.ProductId = Guid.Parse(item.Key);
-                        fp.Quantity = (int)item.Value;
-                        _fridgeProducts.Create(fp);
-                    }
-                }
-
-                _repository.Save();
+                _fridgeService.Create(model, files, webRootPath, products);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Fridges = new SelectList(_fridgeModels.GetAll(), "Fridge_ModelId", "Name");
-            ViewBag.Products = _products.GetAll();
+            ViewBag.Fridges = new SelectList(_fridgeService.GetAllFridgeModels(), "FridgeModelId", "Name");
+            ViewBag.Products = _fridgeService.GetAllProducts();
             return View(model);
         }
     }

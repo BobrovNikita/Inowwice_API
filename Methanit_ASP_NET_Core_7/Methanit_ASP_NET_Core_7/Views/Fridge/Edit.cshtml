@@ -1,5 +1,5 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model Methanit_ASP_NET_Core_7.Models.Fridge
+@model FridgeProducts.Models.Fridge
 
 <!DOCTYPE html>
 <html>
@@ -29,22 +29,22 @@
                         <span asp-validation-for="Name" style="Color: black; font-weight: 700;" />
                     </p>
                     <p>
-                        <label asp-for="Owner_Name">Имя владельца:</label><br />
-                        <input type="text" asp-for="Owner_Name" />
-                        <span asp-validation-for="Owner_Name" style="Color: black; font-weight: 700;" />
+                        <label asp-for="OwnerName">Имя владельца:</label><br />
+                        <input type="text" asp-for="OwnerName" />
+                        <span asp-validation-for="OwnerName" style="Color: black; font-weight: 700;" />
                     </p>
                     <p>
-                        <label asp-for="Fridge_ModelId">Название модели:</label><br />
-                        <select asp-for="Fridge_ModelId" asp-items="ViewBag.Fridges">
+                        <label asp-for="FridgeModelId">Название модели:</label><br />
+                        <select asp-for="FridgeModelId" asp-items="ViewBag.Fridges">
                             <option selected="selected" disabled="disabled">Выберите модель</option>
                         </select>
-                        <span asp-validation-for="Fridge_ModelId" style="Color: black; font-weight: 700;" />
+                        <span asp-validation-for="FridgeModelId" style="Color: black; font-weight: 700;" />
                     </p>
 
                     <p>
                         <label asp-for="Image">Изображение:</label>
                         <div class="but">
-                            <input type="file" accept="image/png, image/jpeg"  />
+                            <input type="file" asp-for="Image" accept=".jpg, .jpeg, .png" />
                         </div>
                     </p>
                     <div class="buttons">

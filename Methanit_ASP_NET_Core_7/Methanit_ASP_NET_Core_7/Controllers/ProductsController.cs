@@ -1,22 +1,23 @@
-﻿using Methanit_ASP_NET_Core_7.Models;
-using Methanit_ASP_NET_Core_7.Repositories;
+﻿using FridgeProducts.Models;
+using FridgeProducts.Repositories;
+using FridgeProducts.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace Methanit_ASP_NET_Core_7.Controllers
+namespace FridgeProducts.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly IRepository<Product> _repository;
-        public ProductsController(IRepository<Product> repository)
+        private readonly IProductsService _productsService;
+        public ProductsController(IProductsService productsService)
         {
-            _repository = repository;
+            _productsService = productsService;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_repository.GetAll());
+            var products = _productsService.GetAll();
+            return View(products);
         }
 
         [HttpGet]
@@ -26,38 +27,30 @@ namespace Methanit_ASP_NET_Core_7.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(Guid? id)
+        public IActionResult Edit(Guid id)
         {
-            if (id != null)
-            {
-                Product? model = _repository.GetModel((Guid)id);
-                if (model != null)
-                    return View(model);
-            }
+            var model = _productsService.GetModel(id);
+            if (model != null)
+                return View(model);
+
             return NotFound();
         }
 
-        public IActionResult Deletes(Guid? id)
+        public IActionResult Deletes(Guid id)
         {
-            if (id != null)
-            {
-                Product? model = _repository.GetModel((Guid)id);
+                var model = _productsService.GetModel(id);
                 return PartialView("Deletes", model);
-            }
-            return NotFound();
         }
-        
+
         [HttpPost]
         public IActionResult Create(Product model)
         {
             if (ModelState.IsValid)
             {
-                _repository.Create(model);
-                _repository.Save();
+                _productsService.Create(model);
                 return RedirectToAction("Index");
             }
             return View(model);
-            
         }
 
         [HttpPost]
@@ -65,19 +58,16 @@ namespace Methanit_ASP_NET_Core_7.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repository.Update(model);
-                _repository.Save();
+                _productsService.Update(model);
                 return RedirectToAction("Index");
             }
             return View(model);
-            
         }
 
         [HttpPost]
         public IActionResult Delete(Product model)
         {
-            _repository.Delete(model.ProductId);
-            _repository.Save();
+            _productsService.Delete(model.ProductId);
             return RedirectToAction("Index");
         }
     }

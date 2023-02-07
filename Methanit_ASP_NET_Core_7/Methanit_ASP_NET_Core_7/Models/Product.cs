@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
-namespace Methanit_ASP_NET_Core_7.Models
+namespace FridgeProducts.Models
 {
     public class Product
     {
@@ -12,10 +12,10 @@ namespace Methanit_ASP_NET_Core_7.Models
 
         [Required(ErrorMessage = "It's require field")]
         [Range(1, 5000, ErrorMessage = "Year must be between 1 and 5000")]
-        public int Default_Quantity { get; set; }
+        public int DefaultQuantity { get; set; }
 
 
         [ValidateNever]
-        public IEnumerable<Fridge_Products> Fridge_Products { get; set; }
+        public IEnumerable<FridgeProducts> FridgeProducts { get; set; }
     }
 }

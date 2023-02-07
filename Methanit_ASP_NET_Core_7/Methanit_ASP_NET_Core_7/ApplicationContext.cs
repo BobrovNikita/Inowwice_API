@@ -1,17 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Methanit_ASP_NET_Core_7.Models;
-using Microsoft.Data.SqlClient;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+﻿using FridgeProducts.Models;
+using Microsoft.EntityFrameworkCore;
 
 
-namespace Methanit_ASP_NET_Core_7
+namespace FridgeProducts
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<Fridge_Model> Fridge_Models { get; set; }
+        public DbSet<FridgeModel> FridgeModels { get; set; }
         public DbSet<Fridge> Fridges { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Fridge_Products> FridgeProducts { get; set; }
+        public DbSet<Models.FridgeProducts> FridgeProducts { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         { }

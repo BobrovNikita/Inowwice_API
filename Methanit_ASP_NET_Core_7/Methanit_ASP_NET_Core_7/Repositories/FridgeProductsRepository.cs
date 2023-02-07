@@ -1,38 +1,33 @@
-﻿using Methanit_ASP_NET_Core_7.Models;
+﻿using FridgeProducts.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Methanit_ASP_NET_Core_7.Repositories
+namespace FridgeProducts.Repositories
 {
-    public class FridgeProductsRepository : IRepository<Fridge_Products>
+    public class FridgeProductsRepository : IRepository<Models.FridgeProducts>
     {
-        ApplicationContext db;
+        private readonly ApplicationContext db;
 
         public FridgeProductsRepository(ApplicationContext context)
         {
             db = context;
         }
 
-        public IEnumerable<Fridge_Products> GetAll()
+        public IEnumerable<Models.FridgeProducts> GetAll()
         {
             return db.FridgeProducts.Include(p => p.Products).Include(f => f.Fridges).ToList();
         }
 
-        public IEnumerable<Fridge_Products> GetAll(Guid id)
-        {
-            return db.FridgeProducts.Include(p => p.Products).Include(f => f.Fridges).Where(f => f.FridgeId == id).ToList();
-        }
-
-        public Fridge_Products GetModel(Guid id)
+        public Models.FridgeProducts GetModel(Guid id)
         {
             return db.FridgeProducts.Include(p => p.Products).Include(f => f.Fridges).First(f => f.Id == id);
         }
 
-        public void Create(Fridge_Products item)
+        public void Create(Models.FridgeProducts item)
         {
             db.FridgeProducts.Add(item);
         }
 
-        public void Update(Fridge_Products item)
+        public void Update(Models.FridgeProducts item)
         {
             db.FridgeProducts.Update(item);
         }

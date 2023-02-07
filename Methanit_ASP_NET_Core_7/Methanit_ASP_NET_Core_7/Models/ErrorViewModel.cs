@@ -1,4 +1,4 @@
-namespace Methanit_ASP_NET_Core_7.Models
+namespace FridgeProducts.Models
 {
     public class ErrorViewModel
     {

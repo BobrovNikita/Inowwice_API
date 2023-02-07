@@ -1,22 +1,24 @@
-﻿using Methanit_ASP_NET_Core_7.Models;
-using Methanit_ASP_NET_Core_7.Repositories;
+﻿using FridgeProducts.Models;
+using FridgeProducts.Repositories;
+using FridgeProducts.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Methanit_ASP_NET_Core_7.Controllers
+namespace FridgeProducts.Controllers
 {
     public class FridgeModelsController : Controller
     {
-        private readonly IRepository<Fridge_Model> _repository;
+        private readonly IFridgeModelsService _fridgeModelService;
 
-        public FridgeModelsController(IRepository<Fridge_Model> repository)
+        public FridgeModelsController(IFridgeModelsService fridgeModelsService)
         {
-            _repository = repository;
+            _fridgeModelService = fridgeModelsService;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_repository.GetAll());
+            var fridgeModels = _fridgeModelService.GetAll();
+            return View(fridgeModels);
         }
 
         [HttpGet]
@@ -26,34 +28,27 @@ namespace Methanit_ASP_NET_Core_7.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(Guid? id)
+        public IActionResult Edit(Guid id)
         {
-            if (id != null)
-            {
-                Fridge_Model? model = _repository.GetModel((Guid)id);
-                if (model != null)
-                    return View(model);
-            }
+            var model = _fridgeModelService.GetModel(id);
+            if (model != null)
+                return View(model);
+
             return NotFound();
         }
 
-        public IActionResult Deletes(Guid? id)
+        public IActionResult Deletes(Guid id)
         {
-            if (id != null)
-            {
-                Fridge_Model? model = _repository.GetModel((Guid)id);
-                return PartialView("Deletes", model);
-            }
-            return NotFound();
+            var model = _fridgeModelService.GetModel(id);
+            return PartialView("Deletes", model);
         }
 
         [HttpPost]
-        public IActionResult Edit(Fridge_Model model)
+        public IActionResult Edit(FridgeModel model)
         {
             if (ModelState.IsValid)
             {
-                _repository.Update(model);
-                _repository.Save();
+                _fridgeModelService.Update(model);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -61,12 +56,11 @@ namespace Methanit_ASP_NET_Core_7.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Fridge_Model model)
+        public IActionResult Create(FridgeModel model)
         {
             if (ModelState.IsValid)
             {
-                _repository.Create(model);
-                _repository.Save();
+                _fridgeModelService.Create(model);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -74,10 +68,9 @@ namespace Methanit_ASP_NET_Core_7.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(Fridge_Model model)
+        public IActionResult Delete(FridgeModel model)
         {
-            _repository.Delete(model.Fridge_ModelId);
-            _repository.Save();
+            _fridgeModelService.Delete(model.FridgeModelId);
             return RedirectToAction("Index");
         }
     }

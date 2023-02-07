@@ -1,5 +1,5 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model IEnumerable<Methanit_ASP_NET_Core_7.Models.Product>
+@model IEnumerable<FridgeProducts.Models.Product>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +26,7 @@
             {
                 <tr>
                     <td>@item.Name</td>
-                    <td>@item.Default_Quantity</td>
+                    <td>@item.DefaultQuantity</td>
                     <td>
                         <form asp-controller="Products" asp-action="Edit" method="get" asp-route-id="@item.ProductId">
                             <input type="submit" value="Редактировать" />

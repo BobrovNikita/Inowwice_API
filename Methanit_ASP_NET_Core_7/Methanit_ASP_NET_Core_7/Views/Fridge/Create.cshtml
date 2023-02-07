@@ -1,4 +1,4 @@
-﻿@model Methanit_ASP_NET_Core_7.Models.Fridge
+﻿@model FridgeProducts.Models.Fridge
 
 <link rel="stylesheet" href="~/css/CreateFridge.css"/>
 <h2>Добавление холодильника</h2>
@@ -11,16 +11,16 @@
                 <span asp-validation-for="Name" style="Color: black; font-weight: 700;" />
             </p>
             <p>
-                <label asp-for="Owner_Name">Имя владельца:</label><br />
-                <input type="text" asp-for="Owner_Name" />
+                <label asp-for="OwnerName">Имя владельца:</label><br />
+                <input type="text" asp-for="OwnerName" />
                 <span asp-validation-for="Name" style="Color: black; font-weight: 700;" />
             </p>
             <p>
-                <label asp-for="Fridge_ModelId">Модель холодильника:</label><br />
-                <select asp-for="Fridge_ModelId" asp-items="ViewBag.Fridges">
+                <label asp-for="FridgeModelId">Модель холодильника:</label><br />
+                <select asp-for="FridgeModelId" asp-items="ViewBag.Fridges">
                     <option selected="selected" disabled="disabled">Выберите модель</option>
                 </select>
-                <span asp-validation-for="Fridge_ModelId" style="Color: black; font-weight: 700;" />
+                <span asp-validation-for="FridgeModelId" style="Color: black; font-weight: 700;" />
             </p>
             <p>
                 <label asp-for="Image">Изображение:</label><br />

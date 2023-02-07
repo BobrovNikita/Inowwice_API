@@ -1,12 +1,12 @@
-using Methanit_ASP_NET_Core_7;
-using Methanit_ASP_NET_Core_7.Models;
-using Methanit_ASP_NET_Core_7.Repositories;
+using FridgeProducts;
+using FridgeProducts.Models;
+using FridgeProducts.Repositories;
+using FridgeProducts.Services;
+using FridgeProducts.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-//DbContext
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationContext>(options =>
     {
@@ -14,13 +14,14 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
         options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     });
 
-
-
-//Repositories
-builder.Services.AddScoped<IRepository<Fridge_Model>, Fridge_Models_Repository>();
+builder.Services.AddScoped<IRepository<FridgeModel>, FridgeModelsRepository>();
 builder.Services.AddScoped<IRepository<Product>, ProductsRepository>();
 builder.Services.AddScoped<IRepository<Fridge>, FridgeRepository>();
-builder.Services.AddScoped<IRepository<Fridge_Products>, FridgeProductsRepository>();
+builder.Services.AddScoped<IRepository<FridgeProducts.Models.FridgeProducts>, FridgeProductsRepository>();
+builder.Services.AddScoped<IFridgeModelsService, FridgeModelService>();
+builder.Services.AddScoped<IProductsService, ProductService>();
+builder.Services.AddScoped<IFridgeProductsService, FridgeProductsService>();
+builder.Services.AddScoped<IFridgeService, FridgeService>();
 
 builder.Services.AddControllersWithViews();
 

@@ -1,9 +1,9 @@
-﻿using Methanit_ASP_NET_Core_7.Models;
+﻿using FridgeProducts.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
-namespace Methanit_ASP_NET_Core_7.Controllers
+namespace FridgeProducts.Controllers
 {
     public class HomeController : Controller
     {
@@ -29,7 +29,7 @@ namespace Methanit_ASP_NET_Core_7.Controllers
         [HttpPost]
         public IActionResult ScoredProcedure()
         {
-            var a = db.Database.ExecuteSqlRaw("UpdateDefaultValueIntoFridgeProducts");
+            db.Database.ExecuteSqlRaw("UpdateDefaultValueIntoFridgeProducts");
             return View("Index");
         }
     }

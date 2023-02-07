@@ -12,16 +12,16 @@ namespace FridgeProducts.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Fridge_Models",
+                name: "FridgeModels",
                 columns: table => new
                 {
-                    FridgeModelId = table.Column<Guid>(name: "Fridge_ModelId", type: "uniqueidentifier", nullable: false),
+                    FridgeModelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fridge_Models", x => x.FridgeModelId);
+                    table.PrimaryKey("PK_FridgeModels", x => x.FridgeModelId);
                 });
 
             migrationBuilder.CreateTable(
@@ -30,7 +30,7 @@ namespace FridgeProducts.Migrations
                 {
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    DefaultQuantity = table.Column<int>(name: "Default_Quantity", type: "int", nullable: false)
+                    DefaultQuantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,18 +43,18 @@ namespace FridgeProducts.Migrations
                 {
                     FridgeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    OwnerName = table.Column<string>(name: "Owner_Name", type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    OwnerName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FridgeModelId = table.Column<Guid>(name: "Fridge_ModelId", type: "uniqueidentifier", nullable: false)
+                    FridgeModelId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fridges", x => x.FridgeId);
                     table.ForeignKey(
-                        name: "FK_Fridges_Fridge_Models_Fridge_ModelId",
+                        name: "FK_Fridges_FridgeModels_FridgeModelId",
                         column: x => x.FridgeModelId,
-                        principalTable: "Fridge_Models",
-                        principalColumn: "Fridge_ModelId",
+                        principalTable: "FridgeModels",
+                        principalColumn: "FridgeModelId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -95,9 +95,9 @@ namespace FridgeProducts.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fridges_Fridge_ModelId",
+                name: "IX_Fridges_FridgeModelId",
                 table: "Fridges",
-                column: "Fridge_ModelId");
+                column: "FridgeModelId");
         }
 
         /// <inheritdoc />
@@ -113,7 +113,7 @@ namespace FridgeProducts.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Fridge_Models");
+                name: "FridgeModels");
         }
     }
 }
